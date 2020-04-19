@@ -79,7 +79,7 @@
       fetch(url, {
         method: "POST",
         body: recipe,
-        headers: {contentType: "application/json"}
+        headers: {'Content-Type': "application/json"}
         })
         .then(resp => loadRecipes());
     }
