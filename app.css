@@ -1,0 +1,4 @@
+#formbody {
+    display:grid;
+    grid-template-columns: 20vw 30vw;
+}

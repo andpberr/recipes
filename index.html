@@ -1,16 +1,88 @@
 <html>
   <head>
     <title>Recipes</title>
+    <link href="./app.css" rel="stylesheet">
   </head>
   <body>
     <h1>Hello Recipes!</h1>
     <p>Hopefully this will work as a basic front-end to interface with my recipe tracking API.</p>
     
-    <form method="POST" action="https://recipes-apb.glitch.me/add-recipe">
-    
-      <label for="name">Recipe Name:</label><input name="name" id="name" value="recipe name" />
-      <input type="submit" value="Submit" />
-    </form>
-    
+   <!-- 
+  const recipeSchema = new mongoose.Schema({
+  name: {type: String, required:true},
+  ingredients: [{name:String, quantity: Number, measure: String}],
+  steps: [String],
+  difficulty: String,
+  time: String
+  });--> 
+    <div id="formbody">
+      <label for="name">Recipe Name:</label><input name="name" id="name" />
+      <label for="difficulty">Difficulty:</label><input name="difficulty" id="difficulty" /> 
+      <label for="time">Time:</label><input name="time" id="time" /> 
+      <label for="ingredients">Ingredients:</label><textarea name="ingredients" id="ingredients"></textarea>
+      <label for="steps">Steps:</label><textarea name="steps" id="steps"></textarea>
+      <button id="submit" onclick="submitRecipe()">Submit</button>
+    </div> 
+
+    <h2>Here are some recipes that have already been added:</h2>
+    <ul id="currRecipesList">
+
+    </ul>
+    <script type="text/javascript">
+
+    function loadRecipes() {
+        const url = "http://recipes-apb.glitch.me/"
+        fetch(url)
+          .then(response => response.json())
+          .then(data => {
+            let list = document.getElementById("currRecipesList");
+            Array.from(list.children).map(e=> list.removeChild(e));
+            data.map(recipe => {
+              let item = document.createElement("li");
+              let rname = recipe.name;
+              item.innerHTML = `<a href="http://recipes-apb.glitch.me/recipe/${rname}">${rname}</a>`;
+              list.appendChild(item);
+            });
+          });
+      }
+
+    loadRecipes();
+
+    function submitRecipe() {
+      let rname = document.getElementById("name").value;
+      let rdiff = document.getElementById("difficulty").value;
+      let rtime = document.getElementById("time").value;
+      let ringr = document.getElementById("ingredients").value;
+      let rstep = document.getElementById("steps").value.split('\r\n');
+
+      ringr = ringr.split('\r\n').map(ing => {
+        let intermediateArray = ing.split(' ');
+        return {
+          name: intermediateArray.slice(2).join(' '),
+          quantity: parseFloat(intermediateArray[0]),
+          measure: intermediateArray[1]
+        };
+      });
+
+      let recipe = {
+        name: rname,
+        difficulty: rdiff,
+        time: rtime,
+        ingredients: ringr,
+        steps: rstep
+      };
+
+      alert(recipe);
+      alert(JSON.stringify(recipe));
+
+      const url = "https://recipes-apb.glitch.me/add-recipe";
+      fetch(url, {
+        method: "POST",
+        body: recipe,
+        headers: {contentType: "application/json"}
+        })
+        .then(resp => loadRecipes());
+    }
+    </script>
   </body>
 </html>
