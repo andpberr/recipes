@@ -31,7 +31,7 @@
     <script type="text/javascript">
 
     function loadRecipes() {
-        const url = "http://recipes-apb.glitch.me/"
+        const url = "https://recipes-apb.glitch.me/"
         fetch(url)
           .then(response => response.json())
           .then(data => {
@@ -40,7 +40,7 @@
             data.map(recipe => {
               let item = document.createElement("li");
               let rname = recipe.name;
-              item.innerHTML = `<a href="http://recipes-apb.glitch.me/recipe/${rname}">${rname}</a>`;
+              item.innerHTML = `<a href="https://recipes-apb.glitch.me/recipe/${rname}">${rname}</a>`;
               list.appendChild(item);
             });
           });
