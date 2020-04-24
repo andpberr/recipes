@@ -40,7 +40,8 @@
             data.map(recipe => {
               let item = document.createElement("li");
               let rname = recipe.name;
-              item.innerHTML = `<a href="https://recipes-apb.glitch.me/recipes/${rname}">${rname}</a>`;
+              item.innerHTML = `<button onclick="deleteRecipe('${rname}')>Delete</button>`;
+              item.innerHTML += `<a href="https://recipes-apb.glitch.me/recipes/${rname}">${rname}</a>`;
               list.appendChild(item);
             });
           });
@@ -81,6 +82,14 @@
         body: JSON.stringify(recipe),
         headers: {'Content-Type': "application/json"}
         })
+        .then(resp => loadRecipes());
+    }
+      
+    function deleteRecipe(rName) {
+      const url = `https://recipes-apb.glitch.me/recipes/${rName}`;
+      fetch(url, {
+        method: "DELETE"
+      })
         .then(resp => loadRecipes());
     }
     </script>
