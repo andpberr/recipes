@@ -40,7 +40,7 @@
             data.map(recipe => {
               let item = document.createElement("li");
               let rname = recipe.name;
-              item.innerHTML = `<button onclick="deleteRecipe('${rname}')>Delete</button>`;
+              item.innerHTML = `<button onclick="deleteRecipe('${rname}');">Delete</button>`;
               item.innerHTML += `<a href="https://recipes-apb.glitch.me/recipes/${rname}">${rname}</a>`;
               list.appendChild(item);
             });
