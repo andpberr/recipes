@@ -73,9 +73,6 @@
         steps: rstep
       };
 
-      alert(recipe);
-      alert(JSON.stringify(recipe));
-
       const url = "https://recipes-apb.glitch.me/recipes";
       fetch(url, {
         method: "POST",
@@ -88,7 +85,8 @@
     function deleteRecipe(rName) {
       const url = `https://recipes-apb.glitch.me/recipes/${rName}`;
       fetch(url, {
-        method: "DELETE"
+        method: "DELETE",
+        headers: {'Content-Type': "application/json"}
       })
         .then(resp => loadRecipes());
     }
