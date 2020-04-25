@@ -54,9 +54,9 @@
       let rdiff = document.getElementById("difficulty").value;
       let rtime = document.getElementById("time").value;
       let ringr = document.getElementById("ingredients").value;
-      let rstep = document.getElementById("steps").value.split('\r\n');
+      let rstep = document.getElementById("steps").value.split('\n');
 
-      ringr = ringr.split('\r\n').map(ing => {
+      ringr = ringr.split('\n').map(ing => {
         let intermediateArray = ing.split(' ');
         return {
           name: intermediateArray.slice(2).join(' '),
