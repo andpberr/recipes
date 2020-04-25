@@ -26,8 +26,11 @@
 
     <h2>Here are some recipes that have already been added:</h2>
     <ul id="currRecipesList">
-
     </ul>
+
+    <div id="shownRecipe">
+    </div>
+
     <script type="text/javascript">
 
     function loadRecipes() {
@@ -40,8 +43,8 @@
             data.map(recipe => {
               let item = document.createElement("li");
               let rname = recipe.name;
-              item.innerHTML = `<button onclick="deleteRecipe('${rname}');">Delete</button>`;
-              item.innerHTML += `<a href="https://recipes-apb.glitch.me/recipes/${rname}">${rname}</a>`;
+              item.innerHTML =  `<button onclick="deleteRecipe('${rname}');">Delete</button>`;
+              item.innerHTML += `<button onclick="showRecipe(  '${rname}');">${rname}</button>`;
               list.appendChild(item);
             });
           });
@@ -89,6 +92,33 @@
         headers: {'Content-Type': "application/json"}
       })
         .then(resp => loadRecipes());
+    }
+
+    function showRecipe(rName) {
+      let shownDiv = document.getElementById("shownRecipe");
+      fetch(`https://recipes-apb.glitch.me/recipes/${rName}`)
+        .then(res => res.json())
+        .then(data => {
+          //shownDiv.innerHTML = JSON.stringify(data);
+          let {name, time, difficulty, ingredients, steps} = data;
+          shownDiv.style.display = "block";
+          shownDiv.innerHTML = `<br /><button onclick="document.getElementById('shownRecipe').style.display='none';">Clear</button>`;
+          shownDiv.innerHTML += `<h3>${name}</h3>`;
+          shownDiv.innerHTML += `<h4>Difficulty: ${difficulty}</h4>`;
+          shownDiv.innerHTML += `<h4>Time: ${time}</h4>`;
+          shownDiv.innerHTML += `<h4>Ingredients</h4>`;
+          shownDiv.innerHTML += `<ul id='ingul'></ul>`;
+          let ingul = document.getElementById("ingul");
+          for (let ing of ingredients) {
+            ingul.innerHTML += `<li>${ing.quantity} ${ing.measure} ${ing.name}</li>`;
+          }
+          shownDiv.innerHTML += `<h4>Steps</h4>`;
+          shownDiv.innerHTML += `<ol id='stpol'></ol>`;
+          let stpol = document.getElementById("stpol");
+          for (let stp of steps) {
+            stpol.innerHTML += `<li>${stp}</li>`;
+          }
+        });
     }
     </script>
   </body>
