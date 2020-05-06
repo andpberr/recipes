@@ -7,6 +7,7 @@
     <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
   </head>
   <body>
+    <div class="container-fluid">
     <h1>Hello Recipes!</h1>
     <p>Hopefully this will work as a basic front-end to interface with my recipe tracking API.</p>
     
@@ -30,7 +31,7 @@
             <label for="ingredients">Ingredients:</label><textarea name="ingredients" id="ingredients"
               class="form-control"></textarea>
             <label for="steps">Steps:</label><textarea name="steps" id="steps" class="form-control"></textarea>
-            <button id="submit" onclick="submitRecipe()" class="btn btn-success">Submit</button>
+            <button id="submit" onclick="submitRecipe()" data-dismiss="modal" class="btn btn-success">Submit</button>
           </div>
         </div>
       </div>
@@ -51,7 +52,7 @@
         </div>
       </div>
     </div>
-
+</div>
     <script type="text/javascript">
 
     function loadRecipes() {
