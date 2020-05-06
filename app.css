@@ -1,9 +1,10 @@
+/*
 #formbody {
     display:grid;
     grid-template-columns: 20vw 30vw;
 }
 
-#shownRecipe {
+/*#shownRecipe {
     position: fixed;
     top: 0px;
     color: black;
@@ -12,3 +13,8 @@
     width: 100%;
     display:none;
 }
+
+#submit {
+    column-span: 1/-1;
+}
+*/
