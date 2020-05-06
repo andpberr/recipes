@@ -121,7 +121,7 @@
       fetch(`https://recipes-apb.glitch.me/recipes/${rName}`)
         .then(res => res.json())
         .then(data => {
-          //shownDiv.innerHTML = JSON.stringify(data);
+          shownDiv.innerHTML = '';
           let {name, time, difficulty, ingredients, steps} = data;
           shownDiv.style.display = "block";
           shownDiv.innerHTML += `<h3>${name}</h3>`;
