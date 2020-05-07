@@ -20,7 +20,7 @@
   time: String
   });--> 
 
-  <div id="addModal" class="modal fade">
+  <div id="addModal" class="modal fade" tabindex="-1">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-body">
@@ -43,7 +43,7 @@
     <div id="currRecipesList">
     </div>
 
-    <div id="recipeModal" class="modal fade">
+    <div id="recipeModal" class="modal fade" tabindex="-1">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div id="shownRecipe" class="modal-body">
@@ -66,7 +66,7 @@
               let item = document.createElement("div");
               item.style.marginBottom="1em";
               let rname = recipe.name;
-              item.innerHTML =  `<button class="btn btn-danger" style="margin-right:1em" onclick="deleteRecipe('${rname}');">Delete</button>`;
+              item.innerHTML =  `<button class="btn btn-danger" style="margin-right:1em" onclick="if (confirm('Are you sure you want to delete \\'${rname}\\'?')){deleteRecipe('${rname}');}">Delete</button>`;
               item.innerHTML += `<button class="btn btn-primary" onclick="showRecipe(  '${rname}');" data-toggle="modal" data-target="#recipeModal">${rname}</button>`;
               list.appendChild(item);
             });
