@@ -56,7 +56,7 @@
     <script type="text/javascript">
 
     function loadRecipes() {
-        const url = "https://recipes-apb.glitch.me/recipes"
+        const url = "https://apb-api.glitch.me/recipes"
         fetch(url)
           .then(response => response.json())
           .then(data => {
@@ -99,7 +99,7 @@
         steps: rstep
       };
 
-      const url = "https://recipes-apb.glitch.me/recipes";
+      const url = "https://apb-api.glitch.me/recipes";
       fetch(url, {
         method: "POST",
         body: JSON.stringify(recipe),
@@ -109,7 +109,7 @@
     }
       
     function deleteRecipe(rName) {
-      const url = `https://recipes-apb.glitch.me/recipes/${rName}`;
+      const url = `https://apb-api.glitch.me/recipes/${rName}`;
       fetch(url, {
         method: "DELETE",
         headers: {'Content-Type': "application/json"}
@@ -119,7 +119,7 @@
 
     function showRecipe(rName) {
       let shownDiv = document.getElementById("shownRecipe");
-      fetch(`https://recipes-apb.glitch.me/recipes/${rName}`)
+      fetch(`https://apb-api.glitch.me/recipes/${rName}`)
         .then(res => res.json())
         .then(data => {
           shownDiv.innerHTML = '';
